@@ -14,7 +14,6 @@ function setup() {
 }
 
 export function sendConfirmationEmail(user) {
-    console.log("yyy");
     const tranport = setup();
     const email = {
         from,
@@ -26,7 +25,20 @@ export function sendConfirmationEmail(user) {
         ${user.generateConfirmationUrl()}
         `
     };
+    tranport.sendMail(email);
+}
 
-    console.log("xxx");
+export function sendRestPasswordEmail(user) {
+    const tranport = setup();
+    const email = {
+        from,
+        to: user.email,
+        subject: "Reset Password",
+        text: `
+        To reset password follow this link
+        
+        ${user.generateResetPasswordUrl()}
+        `
+    };
     tranport.sendMail(email);
 }
